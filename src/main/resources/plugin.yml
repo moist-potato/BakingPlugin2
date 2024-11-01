@@ -1,0 +1,4 @@
+name: BakingPlugin
+version: '1.0-SNAPSHOT'
+main: me.helena.bakingPlugin.BakingPlugin
+api-version: '1.21'
