@@ -1,5 +1,6 @@
 package me.helena.bakingPlugin;
 
+import me.helena.bakingPlugin.utils.FishTrapListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -12,8 +13,14 @@ import java.util.Arrays;
 public final class BakingPlugin extends JavaPlugin {
 
 
+    public static BakingPlugin getInstance() {
+        return getPlugin(BakingPlugin.class);
+    }
+
+
     @Override
     public void onEnable() {
+        getServer().getPluginManager().registerEvents(new FishTrapListener(), this);
 
         getServer().getPluginManager().registerEvents(new FurnaceRecipeDetector(), this);
 
