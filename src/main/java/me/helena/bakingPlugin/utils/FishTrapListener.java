@@ -28,13 +28,14 @@ public class FishTrapListener implements Listener {
             if (event.getAction() == Action.RIGHT_CLICK_AIR){
                 Player player = event.getPlayer();
 
-                if (!LineOfSightUtil.get(player, Material.WATER, 5)) return;
+                Block clickedBlock = LineOfSightUtil.get(player, Material.WATER, 5);
+                if (clickedBlock == null) return;
 
                 if (player.getInventory().getItemInMainHand() != null
                 && player.getInventory().getItemInMainHand().getItemMeta() != null
                 && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(CC.translate("&fFishtrap"))){
 
-                    ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(event.getClickedBlock().getLocation(), EntityType.ARMOR_STAND);
+                    ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(clickedBlock.getLocation(), EntityType.ARMOR_STAND);
 
                     armorStand.setHelmet(new ItemStack(Material.IRON_BARS));
                     armorStand.setInvisible(true);

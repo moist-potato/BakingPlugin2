@@ -8,9 +8,13 @@ import java.util.List;
 
 public class LineOfSightUtil {
 
-    public static boolean get(Player p, Material target, Integer radius){
+    public static Block get(Player p, Material target, Integer radius){
         List<Block> lineOfSight = p.getLineOfSight(null, radius);
-        for (Block b : lineOfSight) {if (b.getType() == target) return true;}
-        return false;
+        for (Block b : lineOfSight) {
+            if (b.getType() == target) {
+                return b;
+            }
+        }
+        return null;
     }
 }
