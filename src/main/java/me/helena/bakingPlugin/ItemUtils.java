@@ -15,9 +15,11 @@ public class ItemUtils {
         String itemName = CC.translate(name);
         List<String> lore1 = new ArrayList<>();
 
-        String[] itemLore =  lore.split("\n");
+        if (!lore.isEmpty()) {
+            String[] itemLore =  lore.split("\n");
+            for (String m : itemLore) {lore1.add(CC.translate(m));}
 
-        for (String m : itemLore) {lore1.add(CC.translate(m));}
+        }
 
         itemMeta.setLore(lore1);
         itemMeta.setDisplayName(itemName);
