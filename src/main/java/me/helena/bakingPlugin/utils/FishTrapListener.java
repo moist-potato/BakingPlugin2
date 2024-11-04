@@ -49,12 +49,14 @@ public class FishTrapListener implements Listener {
                 int customID = new Random().nextInt(100000);
 
                 Location newLocation = clickedBlock.getLocation().clone().add(0,-2, 0);
-                ItemDisplay fishTrap = (ItemDisplay) NBTEditor.set(player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY), customID, "Exists");
+                ItemDisplay fishTrap = (ItemDisplay) player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY);
+                NBTEditor.set(fishTrap, customID, "exists");
 
                 fishTrap.setItemStack(new ItemStack(Material.IRON_BARS));
 
 
-                ArmorStand armorStand = (ArmorStand) NBTEditor.set(player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND), customID, "Exists");
+                ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND);
+                NBTEditor.set(armorStand, customID, "exists");
                 armorStand.setInvisible(true);
                 armorStand.setGravity(false);
                 armorStand.setSmall(true);
@@ -87,9 +89,9 @@ public class FishTrapListener implements Listener {
     public void baitFishTrapEvent(PlayerInteractAtEntityEvent event) {
         Entity armorStand = event.getRightClicked();
         Player player = event.getPlayer();
-        System.out.println("test");
+        System.out.println("test also" + NBTEditor.getInt(armorStand));
         if (armorStand instanceof ArmorStand
-                && NBTEditor.contains(armorStand, "Exists")
+                && NBTEditor.contains(armorStand, "exists")
                 && player.getInventory().getItemInMainHand().getType() == Material.APPLE){
 
             if(!hasBait.get(armorStand)) {
