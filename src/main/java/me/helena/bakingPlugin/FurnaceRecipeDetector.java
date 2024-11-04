@@ -46,7 +46,7 @@ public class FurnaceRecipeDetector implements Listener {
         ItemStack source = inventory.getSmelting();
         if (inventory.isEmpty() || inventory.getSmelting() == null || source.getType() != Material.APPLE) return;
 
-        if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCake Batter"))) return;
+        if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCake Batter")) || source.getItemMeta().getDisplayName().equals(CC.translate("&fCookie Dough")) ) return;
 
         event.setCancelled(true);
 
