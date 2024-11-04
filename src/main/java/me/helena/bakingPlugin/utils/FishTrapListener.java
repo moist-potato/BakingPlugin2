@@ -89,7 +89,7 @@ public class FishTrapListener implements Listener {
         Player player = event.getPlayer();
         System.out.println("test");
         if (armorStand instanceof ArmorStand
-                && NBTEditor.getString(armorStand, "Exists") != null
+                && NBTEditor.contains(armorStand, "Exists")
                 && player.getInventory().getItemInMainHand().getType() == Material.APPLE){
 
             if(!hasBait.get(armorStand)) {
