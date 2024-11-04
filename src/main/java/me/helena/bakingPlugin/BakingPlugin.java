@@ -44,18 +44,18 @@ public final class BakingPlugin extends JavaPlugin {
                 null,
                 null,
                 null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fButter", "", false), 1, "Custom_Model_Data")));
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fButter", "", false), 1, "custom_model_data")));
 
         RecipeUtil.registerRecipes("cookie", false, "123", "4  ", "   ", Arrays.asList(
                 new ItemStack(Material.WHEAT),
                 new ItemStack(Material.SUGAR),
                 new ItemStack(Material.COCOA_BEANS),
-                NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fButter", "", false), 3, "Custom_Model_Data"),
+                NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fButter", "", false), 3, "custom_model_data"),
                 null,
                 null,
                 null,
                 null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 2, "Custom_Model_Data")));
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 2, "custom_model_data")));
 
         RecipeUtil.registerRecipes("cakebatter", true, "123", "456", "789", Arrays.asList(
                 new ItemStack(Material.WHEAT),
@@ -66,7 +66,7 @@ public final class BakingPlugin extends JavaPlugin {
                 new ItemStack(Material.SUGAR),
                 new ItemStack(Material.MILK_BUCKET),
                 new ItemStack(Material.BOWL),
-                new ItemStack(Material.MILK_BUCKET)), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 2, "CustomModelData")));
+                new ItemStack(Material.MILK_BUCKET)), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 2, "custom_model_data")));
 
         RecipeUtil.registerRecipes("fishtrap", true, " 2 ", "4 6", " 8 ", Arrays.asList(
                 null,
