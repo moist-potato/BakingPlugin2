@@ -1,5 +1,6 @@
 package me.helena.bakingPlugin.utils;
 
+import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.helena.bakingPlugin.BakingPlugin;
 import me.helena.bakingPlugin.CC;
 import org.bukkit.Bukkit;
@@ -26,8 +27,6 @@ import java.util.Random;
 public class FishTrapListener implements Listener {
 
     private static HashMap<ArmorStand, Boolean> hasBait = new HashMap<>();
-    private static HashMap<ArmorStand, ItemDisplay> armorStandItemDisplayHashMap = new HashMap<>();
-
 
     // 1 - The fishtrap needs to be loaded with bait (apples)
     // 2 - Fishtrap must be facing water on the sides
@@ -48,18 +47,20 @@ public class FishTrapListener implements Listener {
                     && player.getInventory().getItemInMainHand().getItemMeta() != null
                     && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(CC.translate("&fFishtrap"))){
 
+                int customID = new Random().nextInt(100000);
+
                 Location newLocation = clickedBlock.getLocation().clone().add(0,-2, 0);
-                ItemDisplay fishTrap = (ItemDisplay) player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY);
+                ItemDisplay fishTrap = (ItemDisplay) NBTEditor.set(player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY), customID, "Exists");
 
                 fishTrap.setItemStack(new ItemStack(Material.IRON_BARS));
 
-                ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND);
+
+                ArmorStand armorStand = (ArmorStand) NBTEditor.set(player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND), customID, "Exists");
                 armorStand.setInvisible(true);
                 armorStand.setGravity(false);
                 armorStand.setSmall(true);
 
                 hasBait.put(armorStand, false);
-                armorStandItemDisplayHashMap.put(armorStand, fishTrap);
 
                 event.setCancelled(true);
 
@@ -89,7 +90,7 @@ public class FishTrapListener implements Listener {
         Player player = event.getPlayer();
         System.out.println("test");
         if (armorStand instanceof ArmorStand
-                && armorStandItemDisplayHashMap.get((ArmorStand) armorStand) != null
+                && NBTEditor.getString(armorStand, "Exists") != null
                 && player.getInventory().getItemInMainHand().getType() == Material.APPLE){
 
             if(!hasBait.get(armorStand)) {
