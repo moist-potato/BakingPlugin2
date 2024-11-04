@@ -31,7 +31,7 @@ public class FurnaceRecipeDetector implements Listener {
                 inventory.setSmelting(new ItemStack(Material.BOWL));
 
             } else if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCookie Dough"))) {
-               inventory.setResult(new ItemStack(Material.COOKIE));
+               event.setResult(new ItemStack(Material.COOKIE));
             } else {
                 event.setCancelled(true);
             }
