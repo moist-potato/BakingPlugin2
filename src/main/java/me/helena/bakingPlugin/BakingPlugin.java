@@ -55,7 +55,7 @@ public final class BakingPlugin extends JavaPlugin {
                 null,
                 null,
                 null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 2, "custom_model_data")));
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCookie Dough", "", false), 3, "custom_model_data")));
 
         RecipeUtil.registerRecipes("cakebatter", true, "123", "456", "789", Arrays.asList(
                 new ItemStack(Material.WHEAT),
