@@ -1,5 +1,6 @@
 package me.helena.bakingPlugin;
 
+import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.helena.bakingPlugin.utils.FishTrapListener;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -26,12 +27,35 @@ public final class BakingPlugin extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new CakeBatterEat(), this);
 
-        ItemStack output = new ItemStack(Material.CAKE);
+        System.out.println("Plugin loaded.");
 
-        Bukkit.addRecipe(new FurnaceRecipe(output, Material.MUSHROOM_STEW));
+
+        Bukkit.addRecipe(new FurnaceRecipe(new ItemStack(Material.CAKE), Material.APPLE));
+
 
         Bukkit.removeRecipe(NamespacedKey.minecraft("cake"));
 
+        RecipeUtil.registerRecipes("butter", false, "1  ", "   ", "  ", Arrays.asList(
+                new ItemStack(Material.MILK_BUCKET),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 1, "CustomModelData")));
+
+        RecipeUtil.registerRecipes("cookie", false, "123", "4  ", "   ", Arrays.asList(
+                new ItemStack(Material.WHEAT),
+                new ItemStack(Material.SUGAR),
+                new ItemStack(Material.COCOA_BEANS),
+                NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fButter", "", false), 3, "CustomModelData"),
+                null,
+                null,
+                null,
+                null,
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 2, "CustomModelData")));
 
         RecipeUtil.registerRecipes("cakebatter", true, "123", "456", "789", Arrays.asList(
                 new ItemStack(Material.WHEAT),
@@ -42,7 +66,7 @@ public final class BakingPlugin extends JavaPlugin {
                 new ItemStack(Material.SUGAR),
                 new ItemStack(Material.MILK_BUCKET),
                 new ItemStack(Material.BOWL),
-                new ItemStack(Material.MILK_BUCKET)), (ItemUtils.CreateCustomItem(new ItemStack(Material.MUSHROOM_STEW), "&fCake Batter", "", false)));
+                new ItemStack(Material.MILK_BUCKET)), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fCake Batter", "", false), 2, "CustomModelData")));
 
         RecipeUtil.registerRecipes("fishtrap", true, " 2 ", "4 6", " 8 ", Arrays.asList(
                 null,

@@ -22,13 +22,19 @@ public class FurnaceRecipeDetector implements Listener {
 
         ItemStack source = event.getSource();
 
-        if (source.getType() == Material.MUSHROOM_STEW && source.getItemMeta().getDisplayName().equals(CC.translate("&fCake Batter"))) {
+        if (source.getType() == Material.APPLE) {
             Block furnaceBlock = event.getBlock();
             Furnace furnace = (Furnace) furnaceBlock.getState();
             FurnaceInventory inventory = furnace.getInventory();
-            inventory.setSmelting(new ItemStack(Material.BOWL));
-        } else {
-            event.setCancelled(true);
+            if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCake Batter"))) {
+
+                inventory.setSmelting(new ItemStack(Material.BOWL));
+
+            } else if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCookie Dough"))) {
+               inventory.setResult(new ItemStack(Material.COOKIE));
+            } else {
+                event.setCancelled(true);
+            }
         }
 
     }
@@ -37,9 +43,8 @@ public class FurnaceRecipeDetector implements Listener {
     private void furnaceDetector(FurnaceBurnEvent event) {
         Furnace furnace = ((Furnace) event.getBlock().getState());
         FurnaceInventory inventory = furnace.getInventory();
-        if (inventory.isEmpty() || inventory.getSmelting() == null) return;
-
         ItemStack source = inventory.getSmelting();
+        if (inventory.isEmpty() || inventory.getSmelting() == null || source.getType() != Material.APPLE) return;
 
         if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCake Batter"))) return;
 
