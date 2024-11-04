@@ -50,7 +50,7 @@ public final class BakingPlugin extends JavaPlugin {
                 new ItemStack(Material.WHEAT),
                 new ItemStack(Material.SUGAR),
                 new ItemStack(Material.COCOA_BEANS),
-                NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fButter", "", false), 3, "custom_model_data"),
+                NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fButter", "", false), 1, "custom_model_data"),
                 null,
                 null,
                 null,
