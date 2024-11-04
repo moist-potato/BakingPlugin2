@@ -3,10 +3,7 @@ package me.helena.bakingPlugin.utils;
 import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.helena.bakingPlugin.BakingPlugin;
 import me.helena.bakingPlugin.CC;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
@@ -16,6 +13,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractAtEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataType;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -50,13 +48,13 @@ public class FishTrapListener implements Listener {
 
                 Location newLocation = clickedBlock.getLocation().clone().add(0,-2, 0);
                 ItemDisplay fishTrap = (ItemDisplay) player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY);
-                fishTrap = NBTEditor.set(fishTrap, customID, "exists");
+                addFishingTagToEntity(fishTrap, customID);
 
                 fishTrap.setItemStack(new ItemStack(Material.IRON_BARS));
 
 
                 ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND);
-                armorStand = NBTEditor.set(armorStand, customID, "exists");
+                addFishingTagToEntity(armorStand, customID);
                 armorStand.setInvisible(true);
                 armorStand.setGravity(false);
                 armorStand.setSmall(true);
@@ -91,7 +89,7 @@ public class FishTrapListener implements Listener {
         Player player = event.getPlayer();
         System.out.println("test also" + NBTEditor.getNBTCompound(armorStand, "exists"));
         if (armorStand instanceof ArmorStand
-                && NBTEditor.contains(armorStand, NBTEditor.CUSTOM_DATA, "exists")
+                && entityHasFishingTag(armorStand)
                 && player.getInventory().getItemInMainHand().getType() == Material.APPLE){
 
             if(!hasBait.get(armorStand)) {
@@ -139,6 +137,21 @@ public class FishTrapListener implements Listener {
             }
 
         }
+    }
+
+
+    private void addFishingTagToEntity(Entity entity, int value){
+        NamespacedKey namedspacedKey = new NamespacedKey(BakingPlugin.getInstance(), "exists");
+
+        entity.getPersistentDataContainer().set(namedspacedKey, PersistentDataType.INTEGER, value);
+
+    }
+
+    private boolean entityHasFishingTag(Entity entity){
+        NamespacedKey namedspacedKey = new NamespacedKey(BakingPlugin.getInstance(), "exists");
+
+        return entity.getPersistentDataContainer().has(namedspacedKey, PersistentDataType.INTEGER);
+
     }
 }
 
