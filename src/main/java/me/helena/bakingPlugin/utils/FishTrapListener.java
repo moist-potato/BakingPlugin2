@@ -87,11 +87,13 @@ public class FishTrapListener implements Listener {
     public void baitFishTrapEvent(PlayerInteractAtEntityEvent event) {
         Entity armorStand = event.getRightClicked();
         Player player = event.getPlayer();
-        System.out.println("test also" + NBTEditor.getNBTCompound(armorStand, "exists"));
         if (armorStand instanceof ArmorStand
                 && entityHasFishingTag(armorStand)
                 && player.getInventory().getItemInMainHand().getType() == Material.APPLE){
 
+            if (hasBait.get(armorStand) == null){
+                hasBait.put((ArmorStand) armorStand, false);
+            }
             if(!hasBait.get(armorStand)) {
 
                 hasBait.put((ArmorStand) armorStand, true);
