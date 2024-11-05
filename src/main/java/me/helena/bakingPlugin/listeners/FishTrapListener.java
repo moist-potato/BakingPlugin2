@@ -61,7 +61,7 @@ public class FishTrapListener implements Listener {
 
         if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(CC.translate("&fFishtrap")) )
         {
-            placeFishTrap(event.getBlock().getLocation().clone().add(0, 1, 0), player);
+            placeFishTrap(event.getBlock().getLocation().clone().add(0, 2.5, 0), player);
             event.setCancelled(true);
         }
     }
@@ -125,7 +125,7 @@ public class FishTrapListener implements Listener {
                         chosenAquaticEntity = fish.get(new Random().nextInt(fish.size()));
                     }
 
-                    Location locationToSpawn = event.getRightClicked().getLocation().clone().add(0, -0.5, 0);
+                    Location locationToSpawn = event.getRightClicked().getLocation().clone().add(0, 0.5, 0);
 
 
                     LivingEntity caught = (LivingEntity) player.getWorld().spawnEntity(locationToSpawn, chosenAquaticEntity);
