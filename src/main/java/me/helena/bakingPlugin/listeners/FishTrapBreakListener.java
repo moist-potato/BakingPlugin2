@@ -18,7 +18,8 @@ public class FishTrapBreakListener implements Listener {
     @EventHandler
     public void onPlayerAttack(EntityDamageByEntityEvent event){
 
-        if (EntityTagUtil.entityHasTag(event.getEntity(), "exists") && event.getDamager() instanceof Player){
+        if (EntityTagUtil.entityHasTag(event.getEntity(), "exists") && event.getDamager() instanceof Player
+            && ((Player) event.getDamager()).getInventory().getItemInMainHand().getType() == Material.AIR){
 
             Player player = (Player) event.getDamager();
 
@@ -27,7 +28,8 @@ public class FishTrapBreakListener implements Listener {
 
             for(Entity entity: nearbyEntities){
 
-                if (EntityTagUtil.entityHasTag(entity, "exists") && entity instanceof ItemDisplay && EntityTagUtil.getIntFromTag(entity, "exists") == EntityTagUtil.getIntFromTag(event.getEntity(), "exists")){
+                if (EntityTagUtil.entityHasTag(entity, "exists") && entity instanceof ItemDisplay
+                        && EntityTagUtil.getIntFromTag(entity, "exists") == EntityTagUtil.getIntFromTag(event.getEntity(), "exists")){
 
                     Location location = event.getEntity().getLocation();
                     event.getEntity().remove();
