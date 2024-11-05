@@ -33,7 +33,7 @@ public class FishTrapListener implements Listener {
     // 5 - The trap can be baited again
 
     @EventHandler
-    public void onButtonInteract(PlayerInteractEvent event){
+    public void placeFishTrap(PlayerInteractEvent event){
 
         if (event.getAction() == Action.RIGHT_CLICK_AIR){
             Player player = event.getPlayer();
@@ -45,26 +45,8 @@ public class FishTrapListener implements Listener {
                     && player.getInventory().getItemInMainHand().getItemMeta() != null
                     && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(CC.translate("&fFishtrap"))){
 
-                int customID = new Random().nextInt(100000);
+                placeFishTrap(clickedBlock.getLocation(), player);
 
-                Location newLocation = clickedBlock.getLocation().clone().add(0,-2, 0);
-                ItemDisplay fishTrap = (ItemDisplay) player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY);
-                EntityTagUtil.addTagToEntity(fishTrap, customID, "exists");
-
-                fishTrap.setItemStack(new ItemStack(Material.IRON_BARS));
-
-
-                ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND);
-                EntityTagUtil.addTagToEntity(armorStand, customID, "exists");
-                armorStand.setInvisible(true);
-                armorStand.setGravity(false);
-                armorStand.setSmall(true);
-
-                hasBait.put(armorStand, false);
-
-                event.setCancelled(true);
-
-                player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
 
             }
 
@@ -79,9 +61,35 @@ public class FishTrapListener implements Listener {
 
         if (player.getInventory().getItemInMainHand().getItemMeta() != null && player.getInventory().getItemInMainHand().getItemMeta().getDisplayName().equals(CC.translate("&fFishtrap")) )
         {
+            placeFishTrap(event.getBlock().getLocation().clone().add(0, 1, 0), player);
             event.setCancelled(true);
         }
     }
+
+    private void placeFishTrap(Location location, Player player){
+        int customID = new Random().nextInt(100000);
+
+        Location newLocation = location.clone().add(0,-2, 0);
+        ItemDisplay fishTrap = (ItemDisplay) player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY);
+        EntityTagUtil.addTagToEntity(fishTrap, customID, "exists");
+
+        fishTrap.setItemStack(new ItemStack(Material.IRON_BARS));
+
+
+        ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND);
+        EntityTagUtil.addTagToEntity(armorStand, customID, "exists");
+        armorStand.setInvisible(true);
+        armorStand.setGravity(false);
+        armorStand.setSmall(true);
+
+        hasBait.put(armorStand, false);
+
+        player.getInventory().getItemInMainHand().setAmount(player.getInventory().getItemInMainHand().getAmount() - 1);
+    }
+
+
+
+
 
 
     @EventHandler
