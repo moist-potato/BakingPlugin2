@@ -1,5 +1,6 @@
-package me.helena.bakingPlugin;
+package me.helena.bakingPlugin.listeners;
 
+import me.helena.bakingPlugin.utils.CC;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
@@ -10,7 +11,7 @@ import org.bukkit.event.inventory.FurnaceSmeltEvent;
 import org.bukkit.inventory.FurnaceInventory;
 import org.bukkit.inventory.ItemStack;
 
-public class FurnaceRecipeDetector implements Listener {
+public class FurnaceRecipeDetectorListener implements Listener {
 
 
 

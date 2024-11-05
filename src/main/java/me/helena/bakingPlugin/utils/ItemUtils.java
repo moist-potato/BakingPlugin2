@@ -1,4 +1,4 @@
-package me.helena.bakingPlugin;
+package me.helena.bakingPlugin.utils;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;

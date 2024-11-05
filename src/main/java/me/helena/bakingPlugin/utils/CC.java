@@ -1,4 +1,4 @@
-package me.helena.bakingPlugin;
+package me.helena.bakingPlugin.utils;
 
 import net.md_5.bungee.api.ChatColor;
 

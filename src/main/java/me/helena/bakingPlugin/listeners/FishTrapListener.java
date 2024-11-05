@@ -1,8 +1,8 @@
-package me.helena.bakingPlugin.utils;
+package me.helena.bakingPlugin.listeners;
 
-import io.github.bananapuncher714.nbteditor.NBTEditor;
 import me.helena.bakingPlugin.BakingPlugin;
-import me.helena.bakingPlugin.CC;
+import me.helena.bakingPlugin.utils.CC;
+import me.helena.bakingPlugin.utils.LineOfSightUtil;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;

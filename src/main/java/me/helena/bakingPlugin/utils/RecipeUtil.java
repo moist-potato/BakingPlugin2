@@ -1,4 +1,4 @@
-package me.helena.bakingPlugin;
+package me.helena.bakingPlugin.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;

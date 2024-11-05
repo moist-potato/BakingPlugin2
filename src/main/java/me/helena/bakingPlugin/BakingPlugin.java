@@ -1,7 +1,11 @@
 package me.helena.bakingPlugin;
 
 import io.github.bananapuncher714.nbteditor.NBTEditor;
-import me.helena.bakingPlugin.utils.FishTrapListener;
+import me.helena.bakingPlugin.listeners.CustomFoodEatListener;
+import me.helena.bakingPlugin.listeners.FurnaceRecipeDetectorListener;
+import me.helena.bakingPlugin.listeners.FishTrapListener;
+import me.helena.bakingPlugin.utils.ItemUtils;
+import me.helena.bakingPlugin.utils.RecipeUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -23,11 +27,11 @@ public final class BakingPlugin extends JavaPlugin {
     public void onEnable() {
         getServer().getPluginManager().registerEvents(new FishTrapListener(), this);
 
-        getServer().getPluginManager().registerEvents(new FurnaceRecipeDetector(), this);
+        getServer().getPluginManager().registerEvents(new FurnaceRecipeDetectorListener(), this);
 
-        getServer().getPluginManager().registerEvents(new CakeBatterEat(), this);
+        getServer().getPluginManager().registerEvents(new CustomFoodEatListener(), this);
 
-        System.out.println("Plugin loaded.");
+        System.out.println("Plugin loaded. 5");
 
 
         Bukkit.addRecipe(new FurnaceRecipe(new ItemStack(Material.CAKE), Material.APPLE));
