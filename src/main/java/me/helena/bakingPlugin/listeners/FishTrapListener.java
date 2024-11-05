@@ -2,6 +2,7 @@ package me.helena.bakingPlugin.listeners;
 
 import me.helena.bakingPlugin.BakingPlugin;
 import me.helena.bakingPlugin.utils.CC;
+import me.helena.bakingPlugin.utils.EntityTagUtil;
 import me.helena.bakingPlugin.utils.LineOfSightUtil;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -48,13 +49,13 @@ public class FishTrapListener implements Listener {
 
                 Location newLocation = clickedBlock.getLocation().clone().add(0,-2, 0);
                 ItemDisplay fishTrap = (ItemDisplay) player.getWorld().spawnEntity(newLocation, EntityType.ITEM_DISPLAY);
-                addFishingTagToEntity(fishTrap, customID);
+                EntityTagUtil.addTagToEntity(fishTrap, customID, "exists");
 
                 fishTrap.setItemStack(new ItemStack(Material.IRON_BARS));
 
 
                 ArmorStand armorStand = (ArmorStand) player.getWorld().spawnEntity(newLocation.clone().add(0, -0.5, 0), EntityType.ARMOR_STAND);
-                addFishingTagToEntity(armorStand, customID);
+                EntityTagUtil.addTagToEntity(armorStand, customID, "exists");
                 armorStand.setInvisible(true);
                 armorStand.setGravity(false);
                 armorStand.setSmall(true);
@@ -88,7 +89,7 @@ public class FishTrapListener implements Listener {
         Entity armorStand = event.getRightClicked();
         Player player = event.getPlayer();
         if (armorStand instanceof ArmorStand
-                && entityHasFishingTag(armorStand)
+                && EntityTagUtil.entityHasTag(armorStand, "exists")
                 && player.getInventory().getItemInMainHand().getType() == Material.APPLE){
 
             if (hasBait.get(armorStand) == null){
@@ -139,21 +140,6 @@ public class FishTrapListener implements Listener {
             }
 
         }
-    }
-
-
-    private void addFishingTagToEntity(Entity entity, int value){
-        NamespacedKey namedspacedKey = new NamespacedKey(BakingPlugin.getInstance(), "exists");
-
-        entity.getPersistentDataContainer().set(namedspacedKey, PersistentDataType.INTEGER, value);
-
-    }
-
-    private boolean entityHasFishingTag(Entity entity){
-        NamespacedKey namedspacedKey = new NamespacedKey(BakingPlugin.getInstance(), "exists");
-
-        return entity.getPersistentDataContainer().has(namedspacedKey, PersistentDataType.INTEGER);
-
     }
 }
 
