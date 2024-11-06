@@ -23,9 +23,11 @@ public class FoodData {
     private int saturationAmount;
     @Getter
     private int foodAmount;
+    @Getter
+    private boolean isCookable;
 
 
-    public FoodData(int id, Material material, String name, int customModelData, List<PotionEffect> potionEffects, int saturationAmount, int foodAmount) {
+    public FoodData(int id, Material material, String name, int customModelData, List<PotionEffect> potionEffects, int saturationAmount, int foodAmount, boolean isCookable) {
         this.id = id;
         this.material = material;
         this.name = name;
@@ -33,6 +35,7 @@ public class FoodData {
         this.potionEffects = potionEffects;
         this.saturationAmount = saturationAmount;
         this.foodAmount = foodAmount;
+        this.isCookable = isCookable;
 
     }
 
@@ -55,4 +58,5 @@ public class FoodData {
     public int getFoodAmount() {
         return this.foodAmount;
     }
+    public boolean getIfIsCookable() { return this.isCookable; }
 }
