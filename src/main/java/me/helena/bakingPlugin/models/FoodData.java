@@ -3,6 +3,7 @@ package me.helena.bakingPlugin.models;
 import lombok.Data;
 import lombok.Getter;
 import org.bukkit.Material;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
@@ -10,7 +11,6 @@ import java.util.List;
 @Data
 public class FoodData {
 
-    @Getter private int id;
     @Getter
     private Material material;
     @Getter
@@ -23,21 +23,22 @@ public class FoodData {
     private int saturationAmount;
     @Getter
     private int foodAmount;
+    @Getter
+    private boolean isCookable;
+    @Getter
+    private ItemStack furnaceOutput;
 
 
-    public FoodData(int id, Material material, String name, int customModelData, List<PotionEffect> potionEffects, int saturationAmount, int foodAmount) {
-        this.id = id;
+    public FoodData(Material material, String name, int customModelData, List<PotionEffect> potionEffects, int saturationAmount, int foodAmount, boolean isCookable, ItemStack furnaceOutput) {
         this.material = material;
         this.name = name;
         this.customModelData = customModelData;
         this.potionEffects = potionEffects;
         this.saturationAmount = saturationAmount;
         this.foodAmount = foodAmount;
+        this.isCookable = isCookable;
+        this.furnaceOutput = furnaceOutput;
 
-    }
-
-    public int getID() {
-        return this.id;
     }
 
     public List<PotionEffect> getPotionEffects() {
@@ -55,4 +56,9 @@ public class FoodData {
     public int getFoodAmount() {
         return this.foodAmount;
     }
+    public ItemStack getFurnaceOutput(){
+        return this.furnaceOutput;
+    }
+    public boolean getIfIsCookable() { return this.isCookable; }
+
 }

@@ -1,6 +1,7 @@
 package me.helena.bakingPlugin.listeners;
 
-import me.helena.bakingPlugin.utils.CC;
+import me.helena.bakingPlugin.models.Food;
+import me.helena.bakingPlugin.models.FoodData;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
@@ -23,16 +24,25 @@ public class FurnaceRecipeDetectorListener implements Listener {
 
         ItemStack source = event.getSource();
 
-        if (source.getType() == Material.APPLE) {
+        if (source.getType() == Material.APPLE || source.getType() == Material.MUSHROOM_STEW) {
             Block furnaceBlock = event.getBlock();
             Furnace furnace = (Furnace) furnaceBlock.getState();
             FurnaceInventory inventory = furnace.getInventory();
-            if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCake Batter"))) {
 
-                inventory.setSmelting(new ItemStack(Material.BOWL));
+            System.out.println("is apple or stew");
 
-            } else if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCookie Dough"))) {
-               event.setResult(new ItemStack(Material.COOKIE));
+            if (source.getItemMeta() != null && Food.fromName(source.getItemMeta().getDisplayName()) != null) {
+
+                FoodData foodData = Food.fromName(source.getItemMeta().getDisplayName());
+
+                if (source.getType() == Material.APPLE){
+                    event.setResult(foodData.getFurnaceOutput());
+                }
+                else {
+                    event.setResult(foodData.getFurnaceOutput());
+                    inventory.setSmelting(new ItemStack(Material.BOWL));
+                }
+
             } else {
                 event.setCancelled(true);
             }
@@ -45,9 +55,21 @@ public class FurnaceRecipeDetectorListener implements Listener {
         Furnace furnace = ((Furnace) event.getBlock().getState());
         FurnaceInventory inventory = furnace.getInventory();
         ItemStack source = inventory.getSmelting();
-        if (inventory.isEmpty() || inventory.getSmelting() == null || source.getType() != Material.APPLE) return;
+        if (inventory.isEmpty() || inventory.getSmelting() == null) return;
+        if (source.getType() != Material.APPLE && source.getType() != Material.MUSHROOM_STEW) return;
 
-        if (source.getItemMeta().getDisplayName().equals(CC.translate("&fCake Batter")) || source.getItemMeta().getDisplayName().equals(CC.translate("&fCookie Dough")) ) return;
+        System.out.println("is apple or stew");
+
+        if (source.getItemMeta() != null) {
+            System.out.println("name: " + source.getItemMeta().getDisplayName());
+            System.out.println("food data name: " + Food.fromName(source.getItemMeta().getDisplayName()).name());
+        }
+
+
+
+        if (source.getItemMeta() != null && Food.fromName(source.getItemMeta().getDisplayName()) != null || Food.fromName(source.getItemMeta().getDisplayName()).getIfIsCookable()) return;
+
+        System.out.println("cancelling burn event, is cookable " + Food.fromName(source.getItemMeta().getDisplayName()).getIfIsCookable());
 
         event.setCancelled(true);
 
