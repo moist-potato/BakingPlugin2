@@ -34,7 +34,7 @@ public final class BakingPlugin extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new FishTrapBreakListener(), this);
 
-        System.out.println("Plugin loaded. 6");
+        System.out.println("Plugin loaded. 7");
 
 
         Bukkit.addRecipe(new FurnaceRecipe(new ItemStack(Material.CAKE), Material.APPLE));
