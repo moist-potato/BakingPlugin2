@@ -175,7 +175,7 @@ public final class BakingPlugin extends JavaPlugin {
         RecipeUtil.registerRecipes("rawrabbitstew", false, "123", "45 ", "   ", Arrays.asList(
                 new ItemStack(Material.RABBIT),
                 new ItemStack(Material.CARROT),
-                new ItemStack(Material.BAKED_POTATO),
+                new ItemStack(Material.POTATO),
                 new ItemStack(Material.BROWN_MUSHROOM),
                 new ItemStack(Material.BOWL),
                 null,
@@ -203,7 +203,7 @@ public final class BakingPlugin extends JavaPlugin {
                 null,
                 null,
                 null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fBread Dough", "", false), 11, "custom_model_data")));
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
 
         RecipeUtil.registerRecipes("breaddough2", true, "   ", "456", "   ", Arrays.asList(
                 null,
@@ -214,7 +214,7 @@ public final class BakingPlugin extends JavaPlugin {
                 new ItemStack(Material.WHEAT),
                 null,
                 null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fBread Dough", "", false), 11, "custom_model_data")));
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
 
         RecipeUtil.registerRecipes("breaddough3", true, "   ", "   ", "789", Arrays.asList(
                 null,
@@ -225,7 +225,7 @@ public final class BakingPlugin extends JavaPlugin {
                 null,
                 new ItemStack(Material.WHEAT),
                 new ItemStack(Material.WHEAT),
-                new ItemStack(Material.WHEAT)), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fBread Dough", "", false), 11, "custom_model_data")));
+                new ItemStack(Material.WHEAT)), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
     }
 
     @Override
