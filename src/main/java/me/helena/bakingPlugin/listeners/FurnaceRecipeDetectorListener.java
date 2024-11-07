@@ -2,6 +2,7 @@ package me.helena.bakingPlugin.listeners;
 
 import me.helena.bakingPlugin.models.Food;
 import me.helena.bakingPlugin.models.FoodData;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.Furnace;
@@ -29,14 +30,16 @@ public class FurnaceRecipeDetectorListener implements Listener {
             Furnace furnace = (Furnace) furnaceBlock.getState();
             FurnaceInventory inventory = furnace.getInventory();
 
-            System.out.println("is apple or stew");
 
             if (source.getItemMeta() != null && Food.fromName(source.getItemMeta().getDisplayName()) != null) {
 
                 FoodData foodData = Food.fromName(source.getItemMeta().getDisplayName());
-
+                Bukkit.broadcastMessage("Is updating");
                 if (source.getType() == Material.APPLE){
                     event.setResult(foodData.getFurnaceOutput());
+                    if (inventory.getResult() == foodData.getFurnaceOutput()){
+                        inventory.setResult(inventory.setResult(foodData.getFurnaceOutput()););
+                    }
                 }
                 else {
                     event.setResult(foodData.getFurnaceOutput());
@@ -50,6 +53,7 @@ public class FurnaceRecipeDetectorListener implements Listener {
 
     }
 
+
     @EventHandler
     private void furnaceDetector(FurnaceBurnEvent event) {
         Furnace furnace = ((Furnace) event.getBlock().getState());
@@ -58,18 +62,7 @@ public class FurnaceRecipeDetectorListener implements Listener {
         if (inventory.isEmpty() || inventory.getSmelting() == null) return;
         if (source.getType() != Material.APPLE && source.getType() != Material.MUSHROOM_STEW) return;
 
-        System.out.println("is apple or stew");
-
-        if (source.getItemMeta() != null) {
-            System.out.println("name: " + source.getItemMeta().getDisplayName());
-            System.out.println("food data name: " + Food.fromName(source.getItemMeta().getDisplayName()).name());
-        }
-
-
-
         if (source.getItemMeta() != null && Food.fromName(source.getItemMeta().getDisplayName()) != null || Food.fromName(source.getItemMeta().getDisplayName()).getIfIsCookable()) return;
-
-        System.out.println("cancelling burn event, is cookable " + Food.fromName(source.getItemMeta().getDisplayName()).getIfIsCookable());
 
         event.setCancelled(true);
 

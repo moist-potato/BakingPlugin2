@@ -13,6 +13,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Item;
 import org.bukkit.inventory.FurnaceRecipe;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.SmokingRecipe;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
@@ -40,6 +41,9 @@ public final class BakingPlugin extends JavaPlugin {
 
         Bukkit.addRecipe(new FurnaceRecipe(new ItemStack(Material.CAKE), Material.APPLE));
         Bukkit.addRecipe(new FurnaceRecipe(new ItemStack(Material.BEETROOT_SOUP), Material.MUSHROOM_STEW));
+        //Bukkit.addRecipe(new SmokingRecipe(new NamespacedKey(this, "cake"), new ItemStack(Material.CAKE), Material.APPLE, 10, 100));
+        //Bukkit.addRecipe(new SmokingRecipe(new NamespacedKey(this, "soup"), new ItemStack(Material.BEETROOT_SOUP), Material.MUSHROOM_STEW, 10, 100));
+
 
 
 
@@ -71,7 +75,7 @@ public final class BakingPlugin extends JavaPlugin {
                 null,
                 null,
                 null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 8), "&fCookie Dough", "", false), 3, "custom_model_data")));
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 8), "&fCookie Dough", "", false), 2, "custom_model_data")));
 
         RecipeUtil.registerRecipes("cakebatter", true, "123", "456", "789", Arrays.asList(
                 new ItemStack(Material.WHEAT),
@@ -172,11 +176,22 @@ public final class BakingPlugin extends JavaPlugin {
                 null,
                 null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.MUSHROOM_STEW), "&fRaw Mushroom Stew", "", false), 5, "custom_model_data")));
 
-        RecipeUtil.registerRecipes("rawrabbitstew", false, "123", "45 ", "   ", Arrays.asList(
+        RecipeUtil.registerRecipes("rawrabbitstew1", false, "123", "45 ", "   ", Arrays.asList(
                 new ItemStack(Material.RABBIT),
                 new ItemStack(Material.CARROT),
                 new ItemStack(Material.POTATO),
                 new ItemStack(Material.BROWN_MUSHROOM),
+                new ItemStack(Material.BOWL),
+                null,
+                null,
+                null,
+                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.MUSHROOM_STEW), "&fRaw Rabbit Stew", "", false), 6, "custom_model_data")));
+
+        RecipeUtil.registerRecipes("rawrabbitstew2", false, "123", "45 ", "   ", Arrays.asList(
+                new ItemStack(Material.RABBIT),
+                new ItemStack(Material.CARROT),
+                new ItemStack(Material.POTATO),
+                new ItemStack(Material.RED_MUSHROOM),
                 new ItemStack(Material.BOWL),
                 null,
                 null,
@@ -194,38 +209,39 @@ public final class BakingPlugin extends JavaPlugin {
                 null,
                 null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE), "&fRaw Chicken Pie", "", false), 10, "custom_model_data")));
 
-        RecipeUtil.registerRecipes("breaddough1", true, "123", "   ", "   ", Arrays.asList(
-                new ItemStack(Material.WHEAT),
-                new ItemStack(Material.WHEAT),
-                new ItemStack(Material.WHEAT),
-                null,
-                null,
-                null,
-                null,
-                null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
 
-        RecipeUtil.registerRecipes("breaddough2", true, "   ", "456", "   ", Arrays.asList(
-                null,
-                null,
-                null,
-                null,
-                new ItemStack(Material.WHEAT),
-                new ItemStack(Material.WHEAT),
-                null,
-                null,
-                null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
+            RecipeUtil.registerRecipes("breaddough1", true, "123", "   ", "   ", Arrays.asList(
+                    new ItemStack(Material.WHEAT),
+                    new ItemStack(Material.WHEAT),
+                    new ItemStack(Material.WHEAT),
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
 
-        RecipeUtil.registerRecipes("breaddough3", true, "   ", "   ", "789", Arrays.asList(
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                new ItemStack(Material.WHEAT),
-                new ItemStack(Material.WHEAT),
-                new ItemStack(Material.WHEAT)), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
+            RecipeUtil.registerRecipes("breaddough2", true, "   ", "456", "   ", Arrays.asList(
+                    null,
+                    null,
+                    null,
+                    new ItemStack(Material.WHEAT),
+                    new ItemStack(Material.WHEAT),
+                    new ItemStack(Material.WHEAT),
+                    null,
+                    null,
+                    null), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
+
+            RecipeUtil.registerRecipes("breaddough3", true, "   ", "   ", "789", Arrays.asList(
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    new ItemStack(Material.WHEAT),
+                    new ItemStack(Material.WHEAT),
+                    new ItemStack(Material.WHEAT)), (NBTEditor.set(ItemUtils.CreateCustomItem(new ItemStack(Material.APPLE, 3), "&fBread Dough", "", false), 11, "custom_model_data")));
     }
 
     @Override
